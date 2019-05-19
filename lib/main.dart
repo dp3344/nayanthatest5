@@ -17,7 +17,22 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _isSelected = false;
 
+    bool _checked = false;
+
+  void _onCheck(val) {
+    setState(() {
+      _checked = val;
+    });
+  }
+  
+  
   void _radio() {
+    setState(() {
+      _isSelected = !_isSelected;
+    });
+  }
+
+  void _check() {
     setState(() {
       _isSelected = !_isSelected;
     });
@@ -93,32 +108,24 @@ class _MyAppState extends State<MyApp> {
                               fontWeight: FontWeight.bold))
                     ],
                   ),
+
+/*===========================================*/
+
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(180),
                   ),
                   FormCard(),
+				  
+/*===============================*/				  
+				  
                   SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Row(
+                      Row(mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(
-                            width: 12.0,
-                          ),
-                          GestureDetector(
-                            onTap: _radio,
-                            child: radioButton(_isSelected),
-                          ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Text("Remember me",
-                              style: TextStyle(
-                                  fontSize: 12, fontFamily: "Poppins-Medium"))
-                        ],
-                      ),
                       InkWell(
+					  
                         child: Container(
                           width: ScreenUtil.getInstance().setWidth(330),
                           height: ScreenUtil.getInstance().setHeight(100),
@@ -139,22 +146,62 @@ class _MyAppState extends State<MyApp> {
                             child: InkWell(
                               onTap: () {},
                               child: Center(
-                                child: Text("SIGNIN",
+                                child: Text("Log In",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Poppins-Bold",
-                                        fontSize: 18,
+                                        fontSize: 36,
+                                        letterSpacing: 1.0)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )						  
+                        ],
+                      ),
+					  /*--------------------------
+                      InkWell(
+					  
+                        child: Container(
+                          width: ScreenUtil.getInstance().setWidth(330),
+                          height: ScreenUtil.getInstance().setHeight(100),
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                Color(0xFF17ead9),
+                                Color(0xFF6078ea)
+                              ]),
+                              borderRadius: BorderRadius.circular(6.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color(0xFF6078ea).withOpacity(.3),
+                                    offset: Offset(0.0, 8.0),
+                                    blurRadius: 8.0)
+                              ]),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {},
+                              child: Center(
+                                child: Text("Log In",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins-Bold",
+                                        fontSize: 36,
                                         letterSpacing: 1.0)),
                               ),
                             ),
                           ),
                         ),
                       )
+					  ---------------------*/
                     ],
                   ),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(40),
-                  ),
+                  )
+				  
+/*---------------------------------------------------------------------				  
+				  ,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -225,6 +272,7 @@ class _MyAppState extends State<MyApp> {
                       )
                     ],
                   )
+----------------------------*/				  
                 ],
               ),
             ),
