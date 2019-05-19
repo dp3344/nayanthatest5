@@ -100,70 +100,89 @@ class _MyAppState extends State<MyApp> {
                         width: ScreenUtil.getInstance().setWidth(110),
                         height: ScreenUtil.getInstance().setHeight(110),
                       ),
-                      Text("LOGO",
+                      Text("  Good morning, Nayan",
                           style: TextStyle(
-                              fontFamily: "Poppins-Bold",
-                              fontSize: ScreenUtil.getInstance().setSp(46),
-                              letterSpacing: .6,
-                              fontWeight: FontWeight.bold))
+                              fontFamily: "Poppins-Medium",
+                              fontSize: ScreenUtil.getInstance().setSp(32), 
+                              letterSpacing: .6
+							  //,
+                              //fontWeight: FontWeight.bold
+							  ))
+                    ],
+                  ),
+				  //Row(                    children: <Widget>[Text("")]),
+				  //Row(                    children: <Widget>[Text("")]),
+				  Row(                    children: <Widget>[Text("")]),
+				  //Row(                    children: <Widget>[]),
+                  Row(
+				                      mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Welcome to",
+                          style: TextStyle(
+                              fontFamily: "Poppins-Medium",
+                              fontSize: ScreenUtil.getInstance().setSp(32),
+                              letterSpacing: .6
+							  ,
+                              fontWeight: FontWeight.bold
+							  ))
+                    ],
+                  ),
+                  Row(
+				                      mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Olympic Paycheck",
+                          style: TextStyle(
+                              fontFamily: "Poppins-Medium",
+                              fontSize: ScreenUtil.getInstance().setSp(32),
+                              letterSpacing: .6
+							  ,
+                              fontWeight: FontWeight.bold
+							  ))
                     ],
                   ),
 
-/*===========================================*/
-
                   SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(180),
+                    height: ScreenUtil.getInstance().setHeight(60),
                   ),
                   FormCard(),
-				  
-/*===============================*/				  
-				  
                   SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Row(mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
                         children: <Widget>[
-                      InkWell(
-					  
-                        child: Container(
-                          width: ScreenUtil.getInstance().setWidth(330),
-                          height: ScreenUtil.getInstance().setHeight(100),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Color(0xFF17ead9),
-                                Color(0xFF6078ea)
-                              ]),
-                              borderRadius: BorderRadius.circular(6.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xFF6078ea).withOpacity(.3),
-                                    offset: Offset(0.0, 8.0),
-                                    blurRadius: 8.0)
-                              ]),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Center(
-                                child: Text("Log In",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins-Bold",
-                                        fontSize: 36,
-                                        letterSpacing: 1.0)),
-                              ),
-                            ),
+/*----------------------------------------------
+						SizedBox(
+                            width: 12.0,
                           ),
-                        ),
-                      )						  
+                          GestureDetector(
+                            //onTap: _radio,
+                            //child: radioButton(_isSelected),
+                            onTap: _check,
+                            child: Checkbox(_isSelected),
+							),
+----------------------------------------------*/
+//							              new Text('Please check below to agree to the terms.',
+//                  style: const TextStyle(fontStyle: FontStyle.italic)),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Checkbox(value: _checked, onChanged: (val) => _onCheck(val)),
+                Text("Remember me       "
+,                              style: TextStyle(
+                                  fontSize: ScreenUtil.getInstance().setSp(26), fontFamily: "Poppins-Medium"))
+				]),
+/*----------------------------------			  
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          Text("Remember me",
+                              style: TextStyle(
+                                  fontSize: ScreenUtil.getInstance().setSp(26), fontFamily: "Poppins-Medium"))
+-------------------------------------*/								  
                         ],
                       ),
-					  /*--------------------------
                       InkWell(
-					  
                         child: Container(
-                          width: ScreenUtil.getInstance().setWidth(330),
+                          width: ScreenUtil.getInstance().setWidth(240),
                           height: ScreenUtil.getInstance().setHeight(100),
                           decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [
@@ -186,14 +205,13 @@ class _MyAppState extends State<MyApp> {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Poppins-Bold",
-                                        fontSize: 36,
+                                        fontSize: 20,
                                         letterSpacing: 1.0)),
                               ),
                             ),
                           ),
                         ),
                       )
-					  ---------------------*/
                     ],
                   ),
                   SizedBox(

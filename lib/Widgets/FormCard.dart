@@ -42,7 +42,7 @@ class FormCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       width: double.infinity,
-      height: ScreenUtil.getInstance().setHeight(500),
+      height: ScreenUtil.getInstance().setHeight(300),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
@@ -71,10 +71,13 @@ class FormCard extends StatelessWidget {
               height: ScreenUtil.getInstance().setHeight(30),
             ),
 			----------------------------------*/
+			/*===========================================================================================
             Text("Username",
                 style: TextStyle(
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
+		===========================================================================================*/
+
             TextField(
               decoration: InputDecoration(
                   hintText: "Email Address",
@@ -83,11 +86,15 @@ class FormCard extends StatelessWidget {
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),
+			/*===========================================================================================
+
             Text("PassWord",
                 style: TextStyle(
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
-            TextField(
+		===========================================================================================*/
+
+			TextField(
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "Last 4 digit SSN",
@@ -111,6 +118,8 @@ class FormCard extends StatelessWidget {
               ],
             )
 --------------------------------------------*/	
+
+/*#####################################################################
 				,
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 Checkbox(value: _checked, onChanged: (val) => _onCheck(val)),
@@ -119,9 +128,10 @@ class FormCard extends StatelessWidget {
                                   fontSize: ScreenUtil.getInstance().setSp(26), fontFamily: "Poppins-Medium"))
 								  
 				]
-				
-				
 				)		
+
+#####################################################################*/				
+				
           ],
         ),
       ),
