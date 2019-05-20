@@ -3,11 +3,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Widgets/FormCard.dart';
 import 'Widgets/SocialIcons.dart';
 import 'CustomIcons.dart';
+//import 'package:alert_dialog/main.dart';
+import 'package:flutter/services.dart';
+import 'Widgets/globals.dart' as globals;
 
-void main() => runApp(MaterialApp(
+
+ final myController = TextEditingController();
+ 
+void main() {
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown])
+      .then((_) {
+    runApp(MaterialApp(
       home: MyApp(),
       debugShowCheckedModeBanner: false,
     ));
+  });
+}
+
+
+//void main() => runApp(MaterialApp(
+//      home: MyApp(),
+//      debugShowCheckedModeBanner: false,
+//    ));
 
 class MyApp extends StatefulWidget {
   @override
@@ -71,7 +89,7 @@ class _MyAppState extends State<MyApp> {
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomPadding: false,
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -151,35 +169,70 @@ class _MyAppState extends State<MyApp> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-/*----------------------------------------------
-						SizedBox(
-                            width: 12.0,
-                          ),
-                          GestureDetector(
-                            //onTap: _radio,
-                            //child: radioButton(_isSelected),
-                            onTap: _check,
-                            child: Checkbox(_isSelected),
-							),
-----------------------------------------------*/
-//							              new Text('Please check below to agree to the terms.',
-//                  style: const TextStyle(fontStyle: FontStyle.italic)),
+
+
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Checkbox(value: _checked, onChanged: (val) => _onCheck(val)),
                 Text("Remember me       "
 ,                              style: TextStyle(
-                                  fontSize: ScreenUtil.getInstance().setSp(26), fontFamily: "Poppins-Medium"))
+                                  fontSize: ScreenUtil.getInstance().setSp(26), fontFamily: "Poppins-Medium")),
+						  RaisedButton(
+					  //onPressed: () => {debugPrint('RaisedButton Pressed123')},
+					  onPressed: () => {
+					  
+					  	// debugPrint('RaisedButton Pressed123456');				  
+					  //return 
+					  showDialog (
+					  context: context,
+					  child: AlertDialog(
+            title: const Text('Login'),
+            content: Text(
+			
+			//globals.email
+			
+((globals.email == "") || (globals.password == "") ) ? "Please enter a valid email/password and try again." : "Login successful."
+			
+			),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: const Text('Close'),
+              )
+            ],
+          ) //;ALertDialog
+					  
+					  
+				)//showDialog	  
+					  },
+					  
+					  
+					  
+					  
+					  
+					  
+					  child: Text('Log In', style: TextStyle(
+                            fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)  ),
+					  //color: Theme.of(context).accentColor,
+					  color: Colors.blueAccent,
+					  
+					  ),
+					  //,
+					  //const Text("Log In")
+					  						  
 				]),
-/*----------------------------------			  
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Text("Remember me",
-                              style: TextStyle(
-                                  fontSize: ScreenUtil.getInstance().setSp(26), fontFamily: "Poppins-Medium"))
--------------------------------------*/								  
+
+
+					  
+					  
+
+							  
                         ],
                       ),
+					  /*===========================
+
+					  ////[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]
                       InkWell(
                         child: Container(
                           width: ScreenUtil.getInstance().setWidth(240),
@@ -199,9 +252,24 @@ class _MyAppState extends State<MyApp> {
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+							  
+							  AlertDialog(
+            title: const Text('Address'),
+            content: Text('ABC-PQR'),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: const Text('Close'),
+              )
+            ],
+          );
+							  
+							  },
                               child: Center(
-                                child: Text("Log In",
+                                child: Text("XXX In",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Poppins-Bold",
@@ -212,6 +280,8 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ),
                       )
+					  //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+					  ===========================*/
                     ],
                   ),
                   SizedBox(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'globals.dart' as globals;
 
+ final myController = TextEditingController();
+ final myController2 = TextEditingController();
 //class MainPage extends StatefulWidget{
 //  FormCard createState()=> FormCard();
 //}
@@ -82,6 +85,12 @@ class FormCard extends StatelessWidget {
               decoration: InputDecoration(
                   hintText: "Email Address",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+				  controller: myController,
+              onChanged: (newValue) {
+					globals.email = newValue;
+                  //newValue = newValue;
+ 
+              },				  
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
@@ -99,6 +108,12 @@ class FormCard extends StatelessWidget {
               decoration: InputDecoration(
                   hintText: "Last 4 digit SSN",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+				  controller: myController2,
+              onChanged: (newValue2) {
+					globals.password = newValue2;
+                  //newValue = newValue;
+ 
+              },				  
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(35),
