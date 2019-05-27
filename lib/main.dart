@@ -7,20 +7,17 @@ import 'CustomIcons.dart';
 import 'package:flutter/services.dart';
 import 'Widgets/globals.dart' as globals;
 
+final myController = TextEditingController();
 
- final myController = TextEditingController();
- 
 void main() {
   SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown])
-      .then((_) {
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(MaterialApp(
       home: MyApp(),
       debugShowCheckedModeBanner: false,
     ));
   });
 }
-
 
 //void main() => runApp(MaterialApp(
 //      home: MyApp(),
@@ -34,16 +31,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _isSelected = false;
-
-    bool _checked = false;
+  bool _checked = false;
+  int _index = 0;
+  String _value = '';
+  List<BottomNavigationBarItem> _items;
 
   void _onCheck(val) {
     setState(() {
       _checked = val;
     });
   }
-  
-  
+
   void _radio() {
     setState(() {
       _isSelected = !_isSelected;
@@ -88,6 +86,25 @@ class _MyAppState extends State<MyApp> {
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Scaffold(
+
+      bottomSheet: Container(
+        color: Colors.blueAccent, 
+        padding: EdgeInsets.all(6.0),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        Text('Version 2.0.0 \n \u00a9 2019 Olympic Computer Services, Inc. All rights reserved. ', textAlign: TextAlign.center, 
+                                      style: TextStyle(
+                                          fontSize: 10.0, backgroundColor:Colors.blueAccent,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+        // Text('\u00a9 2019 Olympic Computer Services, Inc. All rights reserved. ',
+        //                               style: TextStyle(
+        //                                   fontSize: 14.0,
+        //                                   color: Colors.white,
+        //                                   fontWeight: FontWeight.bold)),
+
+      ],)),
+      
+      /*================*/
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: false,
       body: Stack(
@@ -121,41 +138,37 @@ class _MyAppState extends State<MyApp> {
                       Text("  Good morning, Nayan",
                           style: TextStyle(
                               fontFamily: "Poppins-Medium",
-                              fontSize: ScreenUtil.getInstance().setSp(32), 
+                              fontSize: ScreenUtil.getInstance().setSp(32),
                               letterSpacing: .6
-							  //,
+                              //,
                               //fontWeight: FontWeight.bold
-							  ))
+                              ))
                     ],
                   ),
-				  //Row(                    children: <Widget>[Text("")]),
-				  //Row(                    children: <Widget>[Text("")]),
-				  Row(                    children: <Widget>[Text("")]),
-				  //Row(                    children: <Widget>[]),
+                  //Row(                    children: <Widget>[Text("")]),
+                  //Row(                    children: <Widget>[Text("")]),
+                  Row(children: <Widget>[Text("")]),
+                  //Row(                    children: <Widget>[]),
                   Row(
-				                      mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Welcome to",
                           style: TextStyle(
                               fontFamily: "Poppins-Medium",
                               fontSize: ScreenUtil.getInstance().setSp(32),
-                              letterSpacing: .6
-							  ,
-                              fontWeight: FontWeight.bold
-							  ))
+                              letterSpacing: .6,
+                              fontWeight: FontWeight.bold))
                     ],
                   ),
                   Row(
-				                      mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Olympic Paycheck",
                           style: TextStyle(
                               fontFamily: "Poppins-Medium",
                               fontSize: ScreenUtil.getInstance().setSp(32),
-                              letterSpacing: .6
-							  ,
-                              fontWeight: FontWeight.bold
-							  ))
+                              letterSpacing: .6,
+                              fontWeight: FontWeight.bold))
                     ],
                   ),
 
@@ -169,204 +182,188 @@ class _MyAppState extends State<MyApp> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-
-
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Checkbox(value: _checked, onChanged: (val) => _onCheck(val)),
-                Text("Remember me       "
-,                              style: TextStyle(
-                                  fontSize: ScreenUtil.getInstance().setSp(26), fontFamily: "Poppins-Medium")),
-						  RaisedButton(
-					  //onPressed: () => {debugPrint('RaisedButton Pressed123')},
-					  onPressed: () => {
-					  
-					  	// debugPrint('RaisedButton Pressed123456');				  
-					  //return 
-					  showDialog (
-					  context: context,
-					  child: AlertDialog(
-            title: const Text('Login'),
-            content: Text(
-			
-			//globals.email
-			
-((globals.email == "") || (globals.password == "") ) ? "Please enter a valid email/password and try again." : "Login successful."
-			
-			),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                child: const Text('Close'),
-              )
-            ],
-          ) //;ALertDialog
-					  
-					  
-				)//showDialog	  
-					  },
-					  
-					  
-					  
-					  
-					  
-					  
-					  child: Text('Log In', style: TextStyle(
-                            fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)  ),
-					  //color: Theme.of(context).accentColor,
-					  color: Colors.blueAccent,
-					  
-					  ),
-					  //,
-					  //const Text("Log In")
-					  						  
-				]),
-
-
-					  
-					  
-
-							  
-                        ],
-                      ),
-					  /*===========================
-
-					  ////[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]
-                      InkWell(
-                        child: Container(
-                          width: ScreenUtil.getInstance().setWidth(240),
-                          height: ScreenUtil.getInstance().setHeight(100),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Color(0xFF17ead9),
-                                Color(0xFF6078ea)
-                              ]),
-                              borderRadius: BorderRadius.circular(6.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xFF6078ea).withOpacity(.3),
-                                    offset: Offset(0.0, 8.0),
-                                    blurRadius: 8.0)
-                              ]),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-							  
-							  AlertDialog(
-            title: const Text('Address'),
-            content: Text('ABC-PQR'),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                child: const Text('Close'),
-              )
-            ],
-          );
-							  
-							  },
-                              child: Center(
-                                child: Text("XXX In",
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.end, // .spaceBetween,
+                              children: [
+                                Checkbox(
+                                    value: _checked,
+                                    onChanged: (val) => _onCheck(val)),
+                                Text("Remember me       " + " ",
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins-Bold",
-                                        fontSize: 20,
-                                        letterSpacing: 1.0)),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-					  //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-					  ===========================*/
+                                        fontSize:
+                                            ScreenUtil.getInstance().setSp(26),
+                                        fontFamily: "Poppins-Medium")),
+                                RaisedButton(
+                                  //onPressed: () => {debugPrint('RaisedButton Pressed123')},
+                                  onPressed: () => {
+                                        // debugPrint('RaisedButton Pressed123456');
+                                        //return
+                                        showDialog(
+                                            context: context,
+                                            child: AlertDialog(
+                                              title: const Text('Login'),
+                                              content: Text(
+
+                                                  //globals.email
+
+                                                  ((globals.email == "") ||
+                                                          (globals.password ==
+                                                              ""))
+                                                      ? "Please enter a valid email/password and try again."
+                                                      : "Login successful."),
+                                              actions: <Widget>[
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(
+                                                        context, true);
+                                                  },
+                                                  child: const Text('Close'),
+                                                )
+                                              ],
+                                            ) //;ALertDialog
+
+                                            ) //showDialog
+                                      },
+
+                                  child: Text('Log In',
+                                      style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white, backgroundColor:Colors.blueAccent,
+                                          fontWeight: FontWeight.bold)),
+                                  //color: Theme.of(context).accentColor,
+                                  color: Colors.blueAccent,
+                                ),
+                                //,
+                                //const Text("Log In")
+                              ]),
+                        ],
+                      ),
                     ],
                   ),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(40),
                   )
-				  
-/*---------------------------------------------------------------------				  
-				  ,
+,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      horizontalLine(),
-                      Text("Social Login",
-                          style: TextStyle(
-                              fontSize: 16.0, fontFamily: "Poppins-Medium")),
-                      horizontalLine()
+                      Row(
+                        children: <Widget>[
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center, // .spaceBetween,
+                              children: [
+
+                                FlatButton(
+                                  //onPressed: () => {debugPrint('RaisedButton Pressed123')},
+                                  onPressed: () => {
+                                        // debugPrint('RaisedButton Pressed123456');
+                                        //return
+                                        showDialog(
+                                            context: context,
+                                            child: AlertDialog(
+                                              title: const Text('Terms & Conditions'),
+                                              content: Text(
+
+                                                  //globals.email
+
+                                                  ((globals.email == "") ||
+                                                          (globals.password ==
+                                                              ""))
+                                                      ? "Please enter a valid email/password and try again."
+                                                      : "Login successful."),
+                                              actions: <Widget>[
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(
+                                                        context, true);
+                                                  },
+                                                  child: const Text('Close'),
+                                                )
+                                              ],
+                                            ) //;ALertDialog
+
+                                            ) //showDialog
+                                      },
+
+                                  child: Text('Privacy & Terms',
+                                      style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.blueAccent,
+                                          fontWeight: FontWeight.bold)),
+                                  //color: Theme.of(context).accentColor,
+                                  color: Colors.white,
+                                ),
+                                //,
+                                //const Text("Log In")
+                              ]),
+                        ],
+                      ),
                     ],
                   ),
+                  
+                  
+                  
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(40),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SocialIcon(
-                        colors: [
-                          Color(0xFF102397),
-                          Color(0xFF187adf),
-                          Color(0xFF00eaf8),
-                        ],
-                        iconData: CustomIcons.facebook,
-                        onPressed: () {},
-                      ),
-                      SocialIcon(
-                        colors: [
-                          Color(0xFFff4f38),
-                          Color(0xFFff355d),
-                        ],
-                        iconData: CustomIcons.googlePlus,
-                        onPressed: () {},
-                      ),
-                      SocialIcon(
-                        colors: [
-                          Color(0xFF17ead9),
-                          Color(0xFF6078ea),
-                        ],
-                        iconData: CustomIcons.twitter,
-                        onPressed: () {},
-                      ),
-                      SocialIcon(
-                        colors: [
-                          Color(0xFF00c6fb),
-                          Color(0xFF005bea),
-                        ],
-                        iconData: CustomIcons.linkedin,
-                        onPressed: () {},
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(30),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "New User? ",
-                        style: TextStyle(fontFamily: "Poppins-Medium"),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Text("SignUp",
-                            style: TextStyle(
-                                color: Color(0xFF5d74e3),
-                                fontFamily: "Poppins-Bold")),
-                      )
-                    ],
                   )
-----------------------------*/				  
+
                 ],
               ),
             ),
-          )
+          ),
+
+/*----------------------------------*/
+      // new BottomNavigationBar(
+      //     items: _items,
+      //     fixedColor: Colors.blue,
+      //     currentIndex: _index,
+      //     onTap: (int item){
+      //       _index = item;
+      //       _value = "Current value is: ${_index.toString()}";
+      //     },
+      // )    
+
+
+
+
+
+/*------------------------------------*/
+
+
         ],
       ),
+    
+    
+    /*==========================
+      appBar: new AppBar(
+        title: new Text('Name here'),
+        backgroundColor: Colors.red,
+      ),
+      //hit Ctrl+space in intellij to know what are the options you can use in flutter widgets
+      body2: new Container(
+        padding: new EdgeInsets.all(32.0),
+        child: new Center(
+          child: new Column(
+            children: <Widget>[
+              new Text(_value)
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: new BottomNavigationBar(
+          items: _items,
+          fixedColor: Colors.blue,
+          currentIndex: _index,
+          onTap: (int item){
+            _index = item;
+            _value = "Current value is: ${_index.toString()}";
+          },
+      )    
+    
+    
+    =======================*/
+    
+    
     );
   }
 }

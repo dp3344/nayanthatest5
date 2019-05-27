@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'globals.dart' as globals;
 
- final myController = TextEditingController();
- final myController2 = TextEditingController();
+final myController = TextEditingController();
+final myController2 = TextEditingController();
 //class MainPage extends StatefulWidget{
 //  FormCard createState()=> FormCard();
 //}
 
 //class HomePage extends State<MainPage>{
- //Your code here
+//Your code here
 //}
 
 //class FormCard extends State<MainPage>{
@@ -18,26 +19,25 @@ class FormCard extends StatelessWidget {
 //class FormCard extends State<MyApp> {
   //bool _isSelected = false;
 
-    bool _checked = true;
+  bool _checked = true;
 
   void _onCheck(val) {
-  _checked = val;
-  //setState();
-   // setState(() {
-   //   _checked = val;
-   // });
- }
-  
-  
+    _checked = val;
+    //setState();
+    // setState(() {
+    //   _checked = val;
+    // });
+  }
+
   void _radio() {
     //setState(() {
-      //_isSelected = !_isSelected;
+    //_isSelected = !_isSelected;
     //});
   }
 
   void _check() {
     //setState(() {
-      //_isSelected = !_isSelected;
+    //_isSelected = !_isSelected;
     //});
   }
 
@@ -45,7 +45,7 @@ class FormCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       width: double.infinity,
-      height: ScreenUtil.getInstance().setHeight(300),
+      height: ScreenUtil.getInstance().setHeight(350),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
@@ -64,7 +64,7 @@ class FormCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-		  /*---------------------------------------
+            /*---------------------------------------
             Text("Login",
                 style: TextStyle(
                     fontSize: ScreenUtil.getInstance().setSp(45),
@@ -74,7 +74,7 @@ class FormCard extends StatelessWidget {
               height: ScreenUtil.getInstance().setHeight(30),
             ),
 			----------------------------------*/
-			/*===========================================================================================
+            /*===========================================================================================
             Text("Username",
                 style: TextStyle(
                     fontFamily: "Poppins-Medium",
@@ -84,18 +84,18 @@ class FormCard extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                   hintText: "Email Address",
+                  icon: Icon(Icons.email),
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-				  controller: myController,
+              controller: myController,
               onChanged: (newValue) {
-					globals.email = newValue;
-                  //newValue = newValue;
- 
-              },				  
+                globals.email = newValue;
+                //newValue = newValue;
+              },
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),
-			/*===========================================================================================
+            /*===========================================================================================
 
             Text("PassWord",
                 style: TextStyle(
@@ -103,21 +103,31 @@ class FormCard extends StatelessWidget {
                     fontSize: ScreenUtil.getInstance().setSp(26))),
 		===========================================================================================*/
 
-			TextField(
+            TextField(
               obscureText: true,
+              keyboardType: TextInputType.number,
+              //maxLength: 4,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(4),
+              ],
               decoration: InputDecoration(
+                  icon: Icon(Icons.lock),
                   hintText: "Last 4 digit SSN",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-				  controller: myController2,
+              controller: myController2,
               onChanged: (newValue2) {
-					globals.password = newValue2;
-                  //newValue = newValue;
- 
-              },				  
+                globals.password = newValue2;
+                //newValue = newValue;
+              },
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(35),
-            )
+              height: ScreenUtil.getInstance().setHeight(35), //35
+            ),
+            //       Row(children: <Widget>[Text("")]),
+            // SizedBox(
+            //   height: ScreenUtil.getInstance().setHeight(35), //35
+            // ),
+
 /*-------------------------------------------			
 			,
             Row(
@@ -132,7 +142,7 @@ class FormCard extends StatelessWidget {
                 )
               ],
             )
---------------------------------------------*/	
+--------------------------------------------*/
 
 /*#####################################################################
 				,
@@ -145,8 +155,7 @@ class FormCard extends StatelessWidget {
 				]
 				)		
 
-#####################################################################*/				
-				
+#####################################################################*/
           ],
         ),
       ),
