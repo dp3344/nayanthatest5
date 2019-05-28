@@ -6,6 +6,8 @@ import 'CustomIcons.dart';
 //import 'package:alert_dialog/main.dart';
 import 'package:flutter/services.dart';
 import 'Widgets/globals.dart' as globals;
+import './SecondScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final myController = TextEditingController();
 
@@ -39,6 +41,11 @@ class _MyAppState extends State<MyApp> {
   void _onCheck(val) {
     setState(() {
       _checked = val;
+      saveData((val == true) ? 1 : 0);
+      /*-----
+       _checked = (val == true) ? true:false;
+      //saveData(val);
+      -----*/
     });
   }
 
@@ -80,30 +87,57 @@ class _MyAppState extends State<MyApp> {
         ),
       );
 
+  int itemNo = 0;
+
+  @override
+  void initState() {
+    super.initState();
+//    SharedPreferences.getInstance().then((sp) {
+//      sp.setInt("itemNo", 3);
+//    });
+    SharedPreferences.getInstance().then((sp) {
+      print("sp " + sp.getInt("my_int_key").toString());
+      _onCheck((sp.getInt("my_int_key") == 1) ? true : false);
+      if(sp.getInt("my_int_key") == 1) {
+        readEmailData();
+      }
+      
+      //globals.gloablmyController.text = "XYZ@abc.com";
+      setState(() {
+        itemNo = sp.getInt("itemNo");
+      });
+    });
+    print("This is the item number " + itemNo.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Scaffold(
-
       bottomSheet: Container(
-        color: Colors.blueAccent, 
-        padding: EdgeInsets.all(6.0),
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-        Text('Version 2.0.0 \n \u00a9 2019 Olympic Computer Services, Inc. All rights reserved. ', textAlign: TextAlign.center, 
-                                      style: TextStyle(
-                                          fontSize: 10.0, backgroundColor:Colors.blueAccent,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-        // Text('\u00a9 2019 Olympic Computer Services, Inc. All rights reserved. ',
-        //                               style: TextStyle(
-        //                                   fontSize: 14.0,
-        //                                   color: Colors.white,
-        //                                   fontWeight: FontWeight.bold)),
+          color: Colors.blueAccent,
+          padding: EdgeInsets.all(6.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                  'Version 2.0.0 \n \u00a9 2019 Olympic Computer Services, Inc. All rights reserved. ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 10.0,
+                      backgroundColor: Colors.blueAccent,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold)),
+              // Text('\u00a9 2019 Olympic Computer Services, Inc. All rights reserved. ',
+              //                               style: TextStyle(
+              //                                   fontSize: 14.0,
+              //                                   color: Colors.white,
+              //                                   fontWeight: FontWeight.bold)),
+            ],
+          )),
 
-      ],)),
-      
       /*================*/
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: false,
@@ -183,7 +217,8 @@ class _MyAppState extends State<MyApp> {
                       Row(
                         children: <Widget>[
                           Row(
-                              mainAxisAlignment: MainAxisAlignment.end, // .spaceBetween,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.end, // .spaceBetween,
                               children: [
                                 Checkbox(
                                     value: _checked,
@@ -198,37 +233,82 @@ class _MyAppState extends State<MyApp> {
                                   onPressed: () => {
                                         // debugPrint('RaisedButton Pressed123456');
                                         //return
-                                        showDialog(
-                                            context: context,
-                                            child: AlertDialog(
-                                              title: const Text('Login'),
-                                              content: Text(
-
-                                                  //globals.email
-
-                                                  ((globals.email == "") ||
+                                        /*==================================*/
+                                        /*===
+                                        _value = ((globals.email == "") ||
                                                           (globals.password ==
                                                               ""))
                                                       ? "Please enter a valid email/password and try again."
-                                                      : "Login successful."),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(
-                                                        context, true);
-                                                  },
-                                                  child: const Text('Close'),
-                                                )
-                                              ],
-                                            ) //;ALertDialog
+                                                      : "Login successful.",
+                                                      ===*/
+                                        if ((globals.email == "") ||
+                                            (globals.password == ""))
+                                          {
+// {
+//         final prefs = await SharedPreferences.getInstance();
+//         final key = 'my_int_key';
+//         final value = 42;
+//         prefs.setInt(key, value);
+//         print('saved $value');
+//       }
 
-                                            ) //showDialog
+                                            print('read1: '),
+                                            saveEmailData(globals.email),
+                                            //saveData(),
+                                            readData(),
+                                            showDialog(
+                                                context: context,
+                                                child: AlertDialog(
+                                                  title: const Text('Login'),
+                                                  content: Text(
+
+                                                      //globals.email
+
+                                                      ((globals.email == "") ||
+                                                              (globals.password ==
+                                                                  ""))
+                                                          ? "Please enter a valid email/password and try again."
+                                                          : "Login successful."),
+                                                  actions: <Widget>[
+                                                    FlatButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(
+                                                            context, true);
+                                                      },
+                                                      child:
+                                                          const Text('Close'),
+                                                    )
+                                                  ],
+                                                ) //;ALertDialog
+
+                                                ) //showDialog
+                                          }
+                                        else
+                                          {
+                                            print('read2: '),
+                                            saveEmailData(globals.email),
+                                            //saveData(),
+                                            readData(),                                            
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          SecondScreen(),
+                                                ))
+                                          }
+
+                                        /*===================================*/
+                                        /*#######################################################*/
+                                        /////////////////////////////////////////////////////////////////////////////////////,
+                                        /*#######################################################*/
                                       },
 
                                   child: Text('Log In',
                                       style: TextStyle(
                                           fontSize: 16.0,
-                                          color: Colors.white, backgroundColor:Colors.blueAccent,
+                                          color: Colors.white,
+                                          backgroundColor: Colors.blueAccent,
                                           fontWeight: FontWeight.bold)),
                                   //color: Theme.of(context).accentColor,
                                   color: Colors.blueAccent,
@@ -242,17 +322,20 @@ class _MyAppState extends State<MyApp> {
                   ),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(40),
-                  )
-,
+                  ),
+
+                  Row(children: <Widget>[Text("")]),
+                  Row(children: <Widget>[Text("")]),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Row(
                         children: <Widget>[
                           Row(
-                              mainAxisAlignment: MainAxisAlignment.center, // .spaceBetween,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.center, // .spaceBetween,
                               children: [
-
                                 FlatButton(
                                   //onPressed: () => {debugPrint('RaisedButton Pressed123')},
                                   onPressed: () => {
@@ -261,16 +344,13 @@ class _MyAppState extends State<MyApp> {
                                         showDialog(
                                             context: context,
                                             child: AlertDialog(
-                                              title: const Text('Terms & Conditions'),
+                                              title: const Text(
+                                                  'Terms & Conditions'),
                                               content: Text(
 
                                                   //globals.email
 
-                                                  ((globals.email == "") ||
-                                                          (globals.password ==
-                                                              ""))
-                                                      ? "Please enter a valid email/password and try again."
-                                                      : "Login successful."),
+                                                  '=== On the Way ==='),
                                               actions: <Widget>[
                                                 FlatButton(
                                                   onPressed: () {
@@ -300,70 +380,99 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ],
                   ),
-                  
-                  
-                  
+
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(40),
                   )
-
                 ],
               ),
             ),
           ),
 
-/*----------------------------------*/
-      // new BottomNavigationBar(
-      //     items: _items,
-      //     fixedColor: Colors.blue,
-      //     currentIndex: _index,
-      //     onTap: (int item){
-      //       _index = item;
-      //       _value = "Current value is: ${_index.toString()}";
-      //     },
-      // )    
+          /*----------------------------------*/
+          // new BottomNavigationBar(
+          //     items: _items,
+          //     fixedColor: Colors.blue,
+          //     currentIndex: _index,
+          //     onTap: (int item){
+          //       _index = item;
+          //       _value = "Current value is: ${_index.toString()}";
+          //     },
+          // )
 
-
-
-
-
-/*------------------------------------*/
-
-
+          /*------------------------------------*/
         ],
       ),
-    
-    
-    /*==========================
-      appBar: new AppBar(
-        title: new Text('Name here'),
-        backgroundColor: Colors.red,
-      ),
-      //hit Ctrl+space in intellij to know what are the options you can use in flutter widgets
-      body2: new Container(
-        padding: new EdgeInsets.all(32.0),
-        child: new Center(
-          child: new Column(
-            children: <Widget>[
-              new Text(_value)
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: new BottomNavigationBar(
-          items: _items,
-          fixedColor: Colors.blue,
-          currentIndex: _index,
-          onTap: (int item){
-            _index = item;
-            _value = "Current value is: ${_index.toString()}";
-          },
-      )    
-    
-    
-    =======================*/
-    
-    
+
+      /*==========================
+                                                appBar: new AppBar(
+                                                  title: new Text('Name here'),
+                                                  backgroundColor: Colors.red,
+                                                ),
+                                                //hit Ctrl+space in intellij to know what are the options you can use in flutter widgets
+                                                body2: new Container(
+                                                  padding: new EdgeInsets.all(32.0),
+                                                  child: new Center(
+                                                    child: new Column(
+                                                      children: <Widget>[
+                                                        new Text(_value)
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                bottomNavigationBar: new BottomNavigationBar(
+                                                    items: _items,
+                                                    fixedColor: Colors.blue,
+                                                    currentIndex: _index,
+                                                    onTap: (int item){
+                                                      _index = item;
+                                                      _value = "Current value is: ${_index.toString()}";
+                                                    },
+                                                )    
+                                              
+                                              
+                                              =======================*/
     );
   }
+
+  saveData(int aVal) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'my_int_key';
+    final value = aVal;
+    prefs.setInt(key, value);
+    print('saved $value');
+  }
+
+  readData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'my_int_key';
+    final value = prefs.getInt(key) ?? 0;
+    print('read: $value');
+    _onCheck((value == 1) ? true : false);
+  }
+
+  saveEmailData(String aVal) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'my_stringEmail_key';
+    final value = aVal;
+    prefs.setString(key, value);
+    print('saved $value');
+  }
+
+  readEmailData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'my_stringEmail_key';
+    final value = prefs.getString(key) ?? "";
+    
+    globals.gloablmyController.text = value;
+
+
+    globals.email = value;
+    print('read: $value');
+    //_onCheck(value);
+  }
+
+
+
+
 }

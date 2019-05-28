@@ -86,7 +86,7 @@ class FormCard extends StatelessWidget {
                   hintText: "Email Address",
                   icon: Icon(Icons.email),
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-              controller: myController,
+              controller: globals.gloablmyController,
               onChanged: (newValue) {
                 globals.email = newValue;
                 //newValue = newValue;
@@ -114,7 +114,7 @@ class FormCard extends StatelessWidget {
                   icon: Icon(Icons.lock),
                   hintText: "Last 4 digit SSN",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-              controller: myController2,
+              controller: globals.gloablmyController2,
               onChanged: (newValue2) {
                 globals.password = newValue2;
                 //newValue = newValue;
